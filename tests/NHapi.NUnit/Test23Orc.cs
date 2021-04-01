@@ -1,10 +1,10 @@
 ﻿namespace NHapi.NUnit
 {
+    using System.Diagnostics;
+
     using global::NUnit.Framework;
 
-    using NHapi.Model.V23.Datatype;
-    using NHapi.Model.V23.Group;
-    using NHapi.Model.V23.Message;
+    using NHapi.Base.Model;
 
     [TestFixture]
     public class Test23Orc
@@ -12,10 +12,59 @@
         [Test]
         public void Test()
         {
-            var msg = new ORM_O01();
-            var order = msg.GetORDER(0);
-            var placerNumber = order.ORC.GetPlacerOrderNumber(0);
-            placerNumber.EntityIdentifier.Value = "123";
+            //var msg = new ORM_O01();
+            //var order = msg.GetORDER(0);
+            //var placerNumber = order.ORC.GetPlacerOrderNumber(0);
+            //placerNumber.EntityIdentifier.Value = "123";
+            ReadVXU_V04();
+        }
+
+        private void ReadVXU_V04()
+        {
+            var hl7_VXU_V04 = @"MSH|^~\&|MyEMR|DE-000001| |CAIRLO|20160701123030-0700||VXU^V04^VXU_V04|CA0001|P|2.5.1|||ER|AL|||||Z22^CDCPHINVS|DE-000001
+PID|1||901900^^^MYEMR^MR||JONES^GEORGE^M^JR^^^L|MILLER^MARTHA^G^^^^M|20140227|M||2106-3^WHITE^CDCREC|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H||^PRN^PH^^^555^5555555||ENG^English^HL70296|||||||2186-5^ not Hispanic orLatino^CDCREC||Y|2
+PD1|||||||||||02^REMINDER/RECALL – ANY METHOD^HL70215|N|20140730|||A|20140730|
+NK1|1|JONES^MARTHA^^^^^L|MTH^MOTHER^HL70063|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H|^PRN^PH^^^555^5555555|
+ORC|RE||197023^CMC|||||||^Clark^Dave||1234567890^Smith^Janet^^^^^^NPPES^L^^^NPI^^^^^^^^MD
+RXA|0|1|20140730||08^HEPB-PEDIATRIC/ADOLESCENT^CVX|.5|mL^mL^UCUM||00^NEW IMMUNIZATIONRECORD^NIP001|1234567890^Smith^Janet^^^^^^NPPES^^^^NPI^^^^^^^^MD |^^^DE000001||||0039F|20200531|MSD^MERCK^MVX|||CP|A
+RXR|C28161^INTRAMUSCULAR^NCIT|LA^LEFT ARM^HL70163
+OBX|1|CE|64994-7^Vaccine funding program eligibility category^LN|1|V03^VFC eligibility –Uninsured^HL70064||||||F|||20110701140500
+MSH|^~\&|MyEMR|DE-000001| |CAIRLO|20160701123030-0700||VXU^V04^VXU_V04|CA0001|P|2.5.1|||ER|AL|||||Z22^CDCPHINVS|DE-000001
+PID|1||129002^^^MYEMR^MR||JONES^GEORGE^M^JR^^^L|MILLER^MARTHA^G^^^^M|20140227|M||2106-3^WHITE^CDCREC|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H||^PRN^PH^^^555^5555555||ENG^English^HL70296|||||||2186-5^ not Hispanic orLatino^CDCREC||Y|2
+PD1|||||||||||02^REMINDER/RECALL – ANY METHOD^HL70215|N|20140730|||A|20140730|
+NK1|1|JONES^MARTHA^^^^^L|MTH^MOTHER^HL70063|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H|^PRN^PH^^^555^5555555|
+ORC|RE||197023^CMC|||||||^Clark^Dave||1234567890^Smith^Janet^^^^^^NPPES^L^^^NPI^^^^^^^^MD
+RXA|0|1|20140730||08^HEPB-PEDIATRIC/ADOLESCENT^CVX|.5|mL^mL^UCUM||00^NEW IMMUNIZATIONRECORD^NIP001|1234567890^Smith^Janet^^^^^^NPPES^^^^NPI^^^^^^^^MD |^^^DE000001||||0039F|20200531|MSD^MERCK^MVX|||CP|A
+RXR|C28161^INTRAMUSCULAR^NCIT|LA^LEFT ARM^HL70163
+OBX|1|CE|64994-7^Vaccine funding program eligibility category^LN|1|V03^VFC eligibility –Uninsured^HL70064||||||F|||20110701140500
+MSH|^~\&|MyEMR|DE-000001| |CAIRLO|20160701123030-0700||VXU^V04^VXU_V04|CA0001|P|2.5.1|||ER|AL|||||Z22^CDCPHINVS|DE-000001
+PID|1||PA123456^^^MYEMR^MR||JONES^GEORGE^M^JR^^^L|MILLER^MARTHA^G^^^^M|20140227|M||2106-3^WHITE^CDCREC|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H||^PRN^PH^^^555^5555555||ENG^English^HL70296|||||||2186-5^ not Hispanic orLatino^CDCREC||Y|2
+PD1|||||||||||02^REMINDER/RECALL – ANY METHOD^HL70215|N|20140730|||A|20140730|
+NK1|1|JONES^MARTHA^^^^^L|MTH^MOTHER^HL70063|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H|^PRN^PH^^^555^5555555|
+ORC|RE||197023^CMC|||||||^Clark^Dave||1234567890^Smith^Janet^^^^^^NPPES^L^^^NPI^^^^^^^^MD
+RXA|0|1|20140730||08^HEPB-PEDIATRIC/ADOLESCENT^CVX|.5|mL^mL^UCUM||00^NEW IMMUNIZATIONRECORD^NIP001|1234567890^Smith^Janet^^^^^^NPPES^^^^NPI^^^^^^^^MD |^^^DE000001||||0039F|20200531|MSD^MERCK^MVX|||CP|A
+RXR|C28161^INTRAMUSCULAR^NCIT|LA^LEFT ARM^HL70163
+OBX|1|CE|64994-7^Vaccine funding program eligibility category^LN|1|V03^VFC eligibility –Uninsured^HL70064||||||F|||20110701140500
+MSH|^~\&|MyEMR|DE-000001| |CAIRLO|20160701123030-0700||VXU^V04^VXU_V04|CA0001|P|2.5.1|||ER|AL|||||Z22^CDCPHINVS|DE-000001
+PID|1||AP11TR2302^^^MYEMR^MR||JONES^GEORGE^M^JR^^^L|MILLER^MARTHA^G^^^^M|20140227|M||2106-3^WHITE^CDCREC|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H||^PRN^PH^^^555^5555555||ENG^English^HL70296|||||||2186-5^ not Hispanic orLatino^CDCREC||Y|2
+PD1|||||||||||02^REMINDER/RECALL – ANY METHOD^HL70215|N|20140730|||A|20140730|
+NK1|1|JONES^MARTHA^^^^^L|MTH^MOTHER^HL70063|1234 W FIRST ST^^BEVERLYHILLS^CA^90210^^H|^PRN^PH^^^555^5555555|
+ORC|RE||197023^CMC|||||||^Clark^Dave||1234567890^Smith^Janet^^^^^^NPPES^L^^^NPI^^^^^^^^MD
+RXA|0|1|20140730||08^HEPB-PEDIATRIC/ADOLESCENT^CVX|.5|mL^mL^UCUM||00^NEW IMMUNIZATIONRECORD^NIP001|1234567890^Smith^Janet^^^^^^NPPES^^^^NPI^^^^^^^^MD |^^^DE000001||||0039F|20200531|MSD^MERCK^MVX|||CP|A
+RXR|C28161^INTRAMUSCULAR^NCIT|LA^LEFT ARM^HL70163
+OBX|1|CE|64994-7^Vaccine funding program eligibility category^LN|1|V03^VFC eligibility –Uninsured^HL70064||||||F|||20110701140500";
+            NHapi.Base.Parser.PipeParser pipeParser = new NHapi.Base.Parser.PipeParser();
+            NHapi.Model.V251.Message.VXU_V04 vXU_V04 = new NHapi.Model.V251.Message.VXU_V04();
+            var hl7 = pipeParser.Parse(hl7_VXU_V04);
+
+#if DEBUG
+            foreach (NHapi.Model.V251.Group.VXU_V04_ORDER item in hl7.GetAll("ORDER"))
+            {
+                Debug.WriteLine(item.PID.GetPatientIdentifierList(0).IDNumber);
+            }
+
+            Debug.WriteLine(((NHapi.Model.V251.Message.VXU_V04)((AbstractGroup)hl7.GetAll("ORDER")[2]).ParentStructure).PID.GetPatientIdentifierList(0));
+#endif
         }
     }
 }
